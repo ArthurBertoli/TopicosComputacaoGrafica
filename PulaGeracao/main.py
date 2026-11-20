@@ -42,8 +42,8 @@ for backend in backends:
                 cap = cap_temp
                 print(f"[SUCESSO] Câmera funcionando na porta {indice}!")
                 break
-            else:
-                cap_temp.release()
+        # Libera as tentativas que falharam (abertas ou não)
+        cap_temp.release()
 
 if cap is None or not cap.isOpened():
     print("\n[ERRO FATAL] O Python não conseguiu roubar a imagem de nenhuma câmera.")
@@ -52,7 +52,9 @@ if cap is None or not cap.isOpened():
     print("2. Tem uma tampinha física de privacidade fechada na lente.")
     print("3. O antivírus (como Kaspersky) bloqueou o Python de usar a webcam.")
     print("4. Outro aplicativo já está com a câmera aberta.")
-    sys.exit()
+    pose.close()
+    pygame.quit()
+    sys.exit(1)
 
 # 4. Loop Principal
 print("[SUCESSO] Sistema pronto!")
@@ -65,7 +67,10 @@ while rodando:
             rodando = False
 
     sucesso, frame = cap.read()
-    if not sucesso: continue
+    if not sucesso:
+        # Evita um laço "vazio" a 100% de CPU enquanto a câmera não entrega imagem
+        relogio.tick(30)
+        continue
 
     # Processamento visual
     frame = cv2.flip(frame, 1)                    
@@ -92,5 +97,6 @@ while rodando:
 
 # 5. Finalização Segura 
 cap.release()
+pose.close()
 pygame.quit()
 sys.exit()

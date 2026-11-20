@@ -19,6 +19,7 @@ Este repositório contém protótipos iniciais em Python: a captura do corpo pel
 - Desenha o tabuleiro de 10 casas: casas normais, **Saber**, **Desafio**, **Bônus** e **Coroa**, cada tipo com sua cor.
 - O cursor do mouse representa o pé do jogador: a casa sob o cursor fica verde e, se for a próxima da sequência, o jogo avança.
 - Ao chegar à Coroa, informa no terminal que a rodada foi concluída e reinicia a sequência.
+- Fecha com `Esc` ou fechando a janela.
 
 ## Tecnologias
 
@@ -30,19 +31,22 @@ Python, Pygame, OpenCV, MediaPipe, NumPy, Aseprite (artes).
 |---|---|
 | `main.py` | Protótipo de captura da câmera e detecção de pose. |
 | `simulacao.py` | Protótipo do tabuleiro controlado pelo mouse. |
+| `requirements.txt` | Dependências com versões fixas (MediaPipe com `mp.solutions`). |
 | `pose_landmarker_lite.task` | Modelo do MediaPipe Pose Landmarker. Está incluído no projeto, mas a versão atual de `main.py` usa a API clássica `mp.solutions.pose` e não carrega este arquivo. |
 | `TelaInicial`, `Fase1`, `Fase2` (`.aseprite` / `.png`) | Artes da tela inicial e das fases. Ainda não são carregadas pelo código. |
 | `PulaGeração (1).pdf` | Apresentação do conceito do jogo (visão geral, objetivos, mecânicas MDA, tabuleiro e modos). |
 
 ## Como executar
 
+Use Python 3.11 ou 3.12.
+
 ```bash
-pip install pygame opencv-python mediapipe numpy
+pip install -r requirements.txt
 python main.py        # câmera + detecção de pose (requer webcam)
 python simulacao.py   # tabuleiro controlado pelo mouse
 ```
 
-`main.py` usa a API clássica `mp.solutions`, portanto é preciso uma versão do MediaPipe que ainda a inclua.
+`main.py` usa a API clássica `mp.solutions`, que foi removida das versões mais novas do MediaPipe; por isso o `requirements.txt` fixa o `mediapipe==0.10.21`, que ainda a inclui. O MediaPipe já instala o `opencv-contrib-python`; não instale também o `opencv-python`.
 
 ## Autores
 

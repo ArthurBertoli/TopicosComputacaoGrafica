@@ -54,6 +54,8 @@ while rodando:
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT: 
             rodando = False
+        if evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE:
+            rodando = False
 
     tela.fill(CORES["fundo"])
     mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -73,7 +75,9 @@ while rodando:
             print(f"Pisou no {nome_casa}! Avançando...")
             indice_alvo += 1
             if indice_alvo >= len(ordem_jogo):
-                print("🏆 RODADA CONCLUÍDA! 🏆")
+                # Sem emoji: em terminais Windows com codificação cp1252 o
+                # print de um emoji gera UnicodeEncodeError e fecha o jogo
+                print("*** RODADA CONCLUÍDA! ***")
                 indice_alvo = 0 # Reinicia para testar de novo
                 
         # Define a cor base da casa conforme o seu tipo no GDD

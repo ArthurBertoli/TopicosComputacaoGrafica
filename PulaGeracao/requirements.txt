@@ -1,0 +1,8 @@
+# Para Python 3.11 ou 3.12. main.py usa a API legada mp.solutions do MediaPipe,
+# que ainda existe na versão fixada abaixo; versões mais novas do MediaPipe a
+# removeram. O MediaPipe já depende do opencv-contrib-python (não instale também
+# o opencv-python, para não haver dois pacotes cv2).
+mediapipe==0.10.21
+numpy==1.26.4
+opencv-contrib-python==4.11.0.86
+pygame==2.6.1
