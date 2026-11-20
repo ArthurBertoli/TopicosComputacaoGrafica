@@ -51,6 +51,7 @@ python simulacao.py   # tabuleiro controlado pelo mouse
 ## Autores
 
 - Arthur Bertoli
+- Monique
 - Mateus Unulino dos Passos (autor indicado no documento de conceito)
 
 Professor: Marcelo da Silva Hounsell.
